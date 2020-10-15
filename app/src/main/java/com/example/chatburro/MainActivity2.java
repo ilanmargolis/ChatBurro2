@@ -2,7 +2,9 @@ package com.example.chatburro;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +18,11 @@ public class MainActivity2 extends AppCompatActivity {
     EditText etMsg2;
     Button btEnviar2;
 
+    SharedPreferences sharePref;
+
+    private static final String TAG_PREFERENCES = MainActivity2.class.getSimpleName();
+    protected static final String TAG_KEY_MESSAGE = "MESSAGE2";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +32,10 @@ public class MainActivity2 extends AppCompatActivity {
         btEnviar2 = (Button) findViewById(R.id.btEnviar2);
         etMsg2 = (EditText) findViewById(R.id.etMsg2);
 
-        String mensagem = getIntent().getStringExtra("MENSAGEM1");
+        String mensagem = getIntent().getStringExtra("MESSAGE1");
+
+        sharePref = this.getSharedPreferences(TAG_PREFERENCES, Context.MODE_PRIVATE);
+
         tvMsg2.setText(mensagem);
         etMsg2.setText("");
 
@@ -34,8 +44,10 @@ public class MainActivity2 extends AppCompatActivity {
             public void onClick(View v) {
                 String mensagem = etMsg2.getText().toString();
 
+                funcoes.salvarDados(sharePref, TAG_KEY_MESSAGE, mensagem);
+
                 Bundle res = new Bundle();
-                res.putString("MENSAGEM2", mensagem);
+                res.putString(TAG_KEY_MESSAGE, mensagem);
 
                 Intent i = new Intent();
                 i.putExtras(res);
@@ -46,4 +58,12 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected  void onResume() {
+        super.onResume();
+
+        tvMsg2.setText(funcoes.recuperarDados(sharePref, TAG_KEY_MESSAGE));
+    }
+
 }

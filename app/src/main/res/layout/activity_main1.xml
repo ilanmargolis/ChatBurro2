@@ -9,6 +9,14 @@
     tools:context=".MainActivity1">
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Primeira tela"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textColor="@android:color/holo_blue_dark"/>
+
+    <TextView
         android:id="@+id/tvMsg1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

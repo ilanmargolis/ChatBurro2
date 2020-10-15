@@ -9,6 +9,14 @@
     tools:context=".MainActivity1">
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Segunda tela"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textColor="@android:color/holo_red_dark"/>
+
+    <TextView
         android:id="@+id/tvMsg2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
